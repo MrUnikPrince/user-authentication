@@ -10,14 +10,12 @@ router.get('/sign-up' , usersController.signUp);
 router.get('/sign-in', usersController.signIn);
 
 // dashbaord
-router.get('/dashbaord' , usersController.dashbaord);
+router.get('/dashboard' , usersController.dashboard);
 
 //sign-out
 router.get('/sign-out', usersController.signOut);
 
 // Register Handle
-router.post('/sign-up', usersController.ragister);
-
-// 
+router.post('/sign-up', usersController.register);
 
 module.exports = router;

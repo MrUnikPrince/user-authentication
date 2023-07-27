@@ -1,31 +1,31 @@
 // sign up function for routes
 module.exports.signUp = (req, res) => {
     return res.render('sign_up', {
-        title: 'ragister'
+        title: 'Register'
     })
 }
 // sign in function for routes
 module.exports.signIn = (req, res) => {
     return res.render('sign_in', {
-        title: 'login'
+        title: 'Login'
     })
 }
 
-module.exports.dashbaord = (req,res) => {
-    return res.render('dashbaord', {
-     title: 'Dashbaord'
+module.exports.dashboard = (req,res) => {
+    return res.render('dashboard', {
+     title: 'Dashboard'
     })
  }
  
 // sign out function for routes
 module.exports.signOut = (req, res) => {
     return res.render('sign_out', {
-        title: 'logout'
+        title: 'Logout'
     })
 }
 
 // ragister function 
-module.exports.ragister = (req, res) => {
+module.exports.register = (req, res) => {
    const { name, email, password, confirm_password } = req.body;
     let errors = [];
 

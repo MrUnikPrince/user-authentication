@@ -20,6 +20,8 @@ app.use(express.urlencoded({extended:false}));
 // routes
 app.use('/', require('./routes'));
 
+
+// Run Server
 app.listen(port, (err) => {
     if(err){
         console.error(`Error in running server ${err}`);
