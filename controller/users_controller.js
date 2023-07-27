@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const passport = require('passport');
 const bcrypt = require ('bcryptjs');
 // sign up function for routes
 module.exports.signUp = (req, res) => {
@@ -75,6 +76,7 @@ module.exports.register = async (req, res) => {
                         //save user
                         newUser.save()
                         .then(user => {
+                            req.flash('success_msg', 'You are now registered and can log in');
                             res.redirect('/users/sign-in')
                         })
                         .catch(err => console.log(`Error in hashing password ${err}`));
@@ -98,3 +100,25 @@ module.exports.register = async (req, res) => {
         }
     }
 } 
+
+
+// sign in Handle
+
+// module.exports.signIn = passport.authenticate('local', {
+//     successRedirect: '/users/dashboard',
+//     failureRedirect: '/users/sign-in',
+//     failureFlash: true
+//   });
+  
+module.exports.signIn = (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/users/dashboard',
+        failureRedirect: '/users/sign-in',
+        failureFlash: true
+    }) (req, res, next);
+}
+// module.exports.signIn = passport.authenticate('local', {
+//     successRedirect: '/users/dashboard',
+//     failureRedirect: '/users/sign-in',
+//     failureFlash: true
+// });

@@ -18,4 +18,6 @@ router.get('/sign-out', usersController.signOut);
 // Register Handle
 router.post('/sign-up', usersController.register);
 
+// sign in Handle
+router.post('/sign-in', usersController.signIn);
 module.exports = router;
