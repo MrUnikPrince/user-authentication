@@ -1,3 +1,5 @@
+const User = require('../models/User');
+const bcrypt = require ('bcryptjs');
 // sign up function for routes
 module.exports.signUp = (req, res) => {
     return res.render('sign_up', {
@@ -25,7 +27,7 @@ module.exports.signOut = (req, res) => {
 }
 
 // ragister function 
-module.exports.register = (req, res) => {
+module.exports.register = async (req, res) => {
    const { name, email, password, confirm_password } = req.body;
     let errors = [];
 
@@ -46,7 +48,7 @@ module.exports.register = (req, res) => {
 
     if(errors.length > 0) {
         res.render('sign_up', {
-            title:'Ragister',
+            title:'Register',
             errors,
             name,
             email,
@@ -54,6 +56,45 @@ module.exports.register = (req, res) => {
             confirm_password
         });
     } else{
-        res.send('pass');
+        // Validation
+        try{
+            const user = await User.findOne({email:email});
+            if(!user){
+                const newUser = new User({
+                    name,
+                    email,
+                    password
+                });
+                // Hash Password
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                        if(err) throw err;
+                        // Store hash in your password DB.
+                        newUser.password = hash;
+
+                        //save user
+                        newUser.save()
+                        .then(user => {
+                            res.redirect('/users/sign-in')
+                        })
+                        .catch(err => console.log(`Error in hashing password ${err}`));
+                    });
+                });
+
+            } else{
+                // User exists
+                errors.push({msg : 'Email is already registered'});
+                res.render('sign_up', {
+                    title:'Register',
+                    errors,
+                    name,
+                    email,
+                    password,
+                    confirm_password
+                });
+            }
+        }catch(err){
+            console.log('Error in creating error');
+        }
     }
 } 
