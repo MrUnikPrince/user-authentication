@@ -15,5 +15,9 @@ router.get('/dashbaord' , usersController.dashbaord);
 //sign-out
 router.get('/sign-out', usersController.signOut);
 
+// Register Handle
+router.post('/sign-up', usersController.ragister);
+
+// 
 
 module.exports = router;

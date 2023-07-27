@@ -2,7 +2,8 @@
     <div class="col-md-6 m-auto">
         <div class="card card-body">
             <h1 class="text-center mb-3"> <i class="fas fa-user-plus"></i>Ragister Form</h1>
-            <form action="/user/sign-up" method="POST">
+            <%- include('partials/messages.ejs') %>    <%# Partials %>
+            <form action="/users/sign-up" method="POST">
                 <div class="form-group">
                     <label for="name">User Name</label>
                     <input type="text" name="name" id="" class="form-control" required value="<%= typeof name != 'undefined' ? name : '' %>">
