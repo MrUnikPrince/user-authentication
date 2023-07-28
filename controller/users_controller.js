@@ -1,4 +1,5 @@
 const User = require('../models/User');
+// const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const passport = require('passport');
 const bcrypt = require ('bcryptjs');
 // sign up function for routes
@@ -16,16 +17,17 @@ module.exports.signIn = (req, res) => {
 
 module.exports.dashboard = (req,res) => {
     return res.render('dashboard', {
-     title: 'Dashboard'
+     title: 'Dashboard',
+     user: req.user
     })
  }
  
 // sign out function for routes
-module.exports.signOut = (req, res) => {
-    return res.render('sign_out', {
-        title: 'Logout'
-    })
-}
+// module.exports.signOut = (req, res) => {
+//     return res.render('sign_out', {
+//         title: 'Logout'
+//     })
+// }
 
 // ragister function 
 module.exports.register = async (req, res) => {
@@ -101,24 +103,20 @@ module.exports.register = async (req, res) => {
     }
 } 
 
-
-// sign in Handle
-
-// module.exports.signIn = passport.authenticate('local', {
-//     successRedirect: '/users/dashboard',
-//     failureRedirect: '/users/sign-in',
-//     failureFlash: true
-//   });
-  
-module.exports.signIn = (req, res, next) => {
+module.exports.signInSession = (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/users/dashboard',
         failureRedirect: '/users/sign-in',
         failureFlash: true
     }) (req, res, next);
 }
-// module.exports.signIn = passport.authenticate('local', {
-//     successRedirect: '/users/dashboard',
-//     failureRedirect: '/users/sign-in',
-//     failureFlash: true
-// });
+
+module.exports.logOut = (req, res) => {
+    req.logOut((err) => {
+        if(err) {
+            errors.push({msg:`Unable to log out`});
+        }
+        req.flash('success_msg', 'You are logged out');
+    res.redirect('/users/sign-in');
+    });
+}

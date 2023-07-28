@@ -34,13 +34,28 @@ module.exports = (passport) => {
         done(null, user.id);
     });
 
-    passport.deserializeUser(async function (id, done) {
-        try {
-            const user = await User.findById(id);
-            done(null, user);
-        } catch (err) {
-            done(err, null);
-        }
-    });
+    // passport.deserializeUser(async function (id, done) {
+        passport.deserializeUser(function (id, done) {
+
+            User.findById(id)
+
+                .then(user => { done(null, user); })
+
+                .catch(err => { done(err, null); })
+
+        });
+
+        // try {
+        //     const user = await User.findById(id);
+        //     if (!user) {
+        //         console.log(`Error in finding user --> Passport`);
+        //         return done(null, false);
+        //     }
+        //     return done(null, user);
+        // } catch (err) {
+        //     console.log(`Error in finding user --> Passport`);
+        //     return done(err);
+        // }
+    // });
 
 }
