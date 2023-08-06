@@ -1,0 +1,13 @@
+[33md3d04b1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m added google authentication
+[33m83f1eae[m added function ensureAuthenticated for limiting the user access
+[33m94369c2[m User Authentication done using local strategy
+[33mf9a23af[m passport.js added
+[33m3dd4d2b[m User Register function done with password Hashing
+[33m562c8ed[m Added Bootstrap
+[33m2326f46[m  added ragister function and also added partials
+[33m7d6af67[m firstly have decided I am not using scss no more after this I have setup Bootstrap and added schema, dashboard, sign-in, and sign-up page, and routes as well
+[33m29f4284[m added scss and some ejs files
+[33m74de00e[m  added Database connection
+[33m1db9a13[m Express app set up done and view engine added
+[33m5607079[m  gitignore file added
+[33m50429d5[m starting user authentication system which can be used as a starter code for creating any new application

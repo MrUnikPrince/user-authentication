@@ -14,13 +14,6 @@ module.exports.signIn = (req, res) => {
         title: 'Login'
     })
 }
-
-module.exports.dashboard = (req,res) => {
-    return res.render('dashboard', {
-     title: 'Dashboard',
-     user: req.user
-    })
- }
  
 // sign out function for routes
 // module.exports.signOut = (req, res) => {
@@ -29,7 +22,7 @@ module.exports.dashboard = (req,res) => {
 //     })
 // }
 
-// ragister function 
+// register function 
 module.exports.register = async (req, res) => {
    const { name, email, password, confirm_password } = req.body;
     let errors = [];
@@ -105,7 +98,7 @@ module.exports.register = async (req, res) => {
 
 module.exports.signInSession = (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/users/dashboard',
+        successRedirect: '/dashboard',
         failureRedirect: '/users/sign-in',
         failureFlash: true
     }) (req, res, next);
@@ -120,3 +113,4 @@ module.exports.logOut = (req, res) => {
     res.redirect('/users/sign-in');
     });
 }
+
