@@ -1,5 +1,6 @@
 const { log } = require('console');
 const router = require('express').Router();
+const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const usersController = require('../controller/users_controller');
 
 // sign up page
@@ -20,4 +21,13 @@ router.post('/sign-in', usersController.signInSession);
 // log -out 
 router.get('/sign-out', usersController.logOut);
 
+
+// reset 
+router.get('/reset', ensureAuthenticated, usersController.reset);
+
+//get email 
+router.post('/reset', ensureAuthenticated, usersController.getEmail);
+// reset password
+// router.get('/reset-password', ensureAuthenticated, usersController.resetPassword);
+router.post('/reset-password', usersController.updatePassword);
 module.exports = router;
