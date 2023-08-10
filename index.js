@@ -1,5 +1,5 @@
 const express = require('express');  // importing express
-const port = 8000;
+const port = process.env.port || 8000;
 const db = require('./config/mongoose');   // importing db connection 
 const expressLayouts = require('express-ejs-layouts');
 const flash = require('connect-flash');
