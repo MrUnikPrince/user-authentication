@@ -49,7 +49,7 @@ module.exports = (passport) => {
 passport.use(new GoogleStrategy({
     clientID: process.env.CLIENT_ID,
     clientSecret: process.env.SECRET,
-    callbackURL: "http://localhost:8000/google/callback"
+    callbackURL: "http://https://user-authentication-ilpu.onrender.com//google/callback"
   },
   async function(accessToken, refreshToken, profile, done) {
     try{
