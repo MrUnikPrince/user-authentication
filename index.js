@@ -3,6 +3,7 @@ const port = process.env.port || 8000;
 const db = require('./config/mongoose');   // importing db connection 
 const expressLayouts = require('express-ejs-layouts');
 const flash = require('connect-flash');
+const MongoStore = require('connect-mongo');
 const session = require('express-session');
 const passport = require('passport');
 const app = express();
@@ -25,8 +26,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(session({
     secret: 'too secret',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: 'mongodb+srv://UniquePrince:32323212@cluster0.sezsu7p.mongodb.net/?retryWrites=true&w=majority',
+        autoRemove: 'disabled'
+    })
 }));
+
 
 //Passport middleware
 app.use(passport.initialize());
