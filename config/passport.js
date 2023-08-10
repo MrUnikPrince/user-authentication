@@ -53,7 +53,6 @@ passport.use(new GoogleStrategy({
   },
   async function(accessToken, refreshToken, profile, done) {
     try{
-        console.log(profile);
         const user = await User.findOne({email: profile.emails[0].value});
         if(user){
             return done(null, user);
@@ -63,7 +62,6 @@ passport.use(new GoogleStrategy({
                 email: profile.emails[0].value,
                 password: crypto.randomBytes(20).toString('hex')
             });
-        console.log(newUser);
             return done(null, newUser);
         }
     }catch(err){
